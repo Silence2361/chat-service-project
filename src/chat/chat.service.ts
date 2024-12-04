@@ -12,9 +12,9 @@ import {
   IGetChatByUserId,
   IGetChatByUserIdResponse,
   IGetChatsResponse,
-} from 'src/database/chat/chat.interface';
-import { ChatRepository } from 'src/database/chat/chat.repository';
-import { UserRepository } from 'src/database/user/user.repository';
+} from '../database/chat/chat.interface';
+import { ChatRepository } from '../database/chat/chat.repository';
+import { UserRepository } from '../database/user/user.repository';
 
 @Injectable()
 export class ChatService {

@@ -4,8 +4,8 @@ import {
   ICreateUserResponse,
   IGetUsersResponse,
   IUser,
-} from 'src/database/user/user.interface';
-import { UserRepository } from 'src/database/user/user.repository';
+} from '../database/user/user.interface';
+import { UserRepository } from '../database/user/user.repository';
 
 @Injectable()
 export class UserService {

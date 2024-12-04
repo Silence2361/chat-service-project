@@ -1,4 +1,4 @@
-import { InjectModel } from 'nestjs-objection/dist';
+import { InjectModel } from 'nestjs-objection';
 import { Chat } from './chat.model';
 import { ModelClass } from 'objection';
 import { IChat, ICreateChatRepositoryData } from './chat.interface';
@@ -18,7 +18,7 @@ export class ChatRepository {
     return this.chatModel.query();
   }
 
-  async getChatById(id: number): Promise<IChat> {
+  async getChatById(id: number): Promise<IChat | undefined> {
     return this.chatModel.query().findById(id);
   }
 

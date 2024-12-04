@@ -3,17 +3,17 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { IChat } from 'src/database/chat/chat.interface';
-import { ChatRepository } from 'src/database/chat/chat.repository';
+import { IChat } from '../database/chat/chat.interface';
+import { ChatRepository } from '../database/chat/chat.repository';
 import {
   ICreateMessage,
   ICreateMessageResponse,
   IGetMessageByChatId,
   IGetMessageByChatIdResponse,
   IMessage,
-} from 'src/database/message/message.interface';
-import { MessageRepository } from 'src/database/message/message.repository';
-import { UserRepository } from 'src/database/user/user.repository';
+} from '..//database/message/message.interface';
+import { MessageRepository } from '../database/message/message.repository';
+import { UserRepository } from '..//database/user/user.repository';
 
 @Injectable()
 export class MessageService {
