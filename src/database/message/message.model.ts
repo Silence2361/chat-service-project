@@ -3,7 +3,7 @@ import { Chat } from '../chat/chat.model';
 import { User } from '../user/user.model';
 
 export class Message extends Model {
-  static tableName: 'message';
+  static tableName = 'messages';
 
   id: number;
   chat_id: number;
@@ -14,7 +14,7 @@ export class Message extends Model {
   static get jsonSchema() {
     return {
       type: 'object',
-      required: ['chat_id, author_id', 'text'],
+      required: ['chat_id', 'author_id', 'text'],
 
       properties: {
         id: { type: 'integer' },

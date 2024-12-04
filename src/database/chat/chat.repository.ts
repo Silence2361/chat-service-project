@@ -23,16 +23,14 @@ export class ChatRepository {
   }
 
   async getChatListByUserId(user_id: number): Promise<IChat[]> {
-    return (
-      this.chatModel
-        .query()
-        .joinRelated('users')
-        // .leftJoinRelated('messages')
-        .where('users.id', user_id)
-        .groupBy('chats.id')
-        // .orderByRaw('MAX(messages.created_at) DESC NULLS LAST')
-        .select('chats.*')
-    );
+    return this.chatModel
+      .query()
+      .joinRelated('users')
+      .leftJoinRelated('messages')
+      .where('users.id', user_id)
+      .groupBy('chats.id')
+      .orderByRaw('MAX(messages.created_at) DESC NULLS LAST')
+      .select('chats.*');
   }
 
   async relateUsersToChat(chat_id: number, userIds: number[]): Promise<void> {
@@ -43,5 +41,16 @@ export class ChatRepository {
 
   async getChatByName(name: string): Promise<IChat> {
     return this.chatModel.query().findOne({ name });
+  }
+
+  async isUserInChat(chat_id: number, user_id: number): Promise<boolean> {
+    const result = await this.chatModel
+      .query()
+      .joinRelated('users')
+      .where('chats.id', chat_id)
+      .andWhere('users.id', user_id)
+      .first();
+
+    return !!result;
   }
 }

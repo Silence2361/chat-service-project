@@ -8,17 +8,17 @@ import { ICreateMessage, IMessage } from './message.interface';
 export class MessageRepository {
   constructor(
     @InjectModel(Message)
-    private readonly messageRepository: ModelClass<Message>,
+    private readonly messageModel: ModelClass<Message>,
   ) {}
 
   async createMessage(createMessage: ICreateMessage): Promise<IMessage> {
-    return this.messageRepository.query().insert(createMessage);
+    return this.messageModel.query().insert(createMessage);
   }
 
-  async getMessageByChatId(chatId: number): Promise<IMessage[]> {
-    return this.messageRepository
+  async getMessageByChatId(chat_id: number): Promise<IMessage[]> {
+    return this.messageModel
       .query()
-      .where('chat_id', chatId)
+      .where('chat_id', chat_id)
       .orderBy('created_at', 'asc');
   }
 }

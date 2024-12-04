@@ -5,6 +5,9 @@ import * as Knex from 'knex';
 import { DatabaseModule } from './database/database.module';
 import { UserModule } from './user/user.module';
 import { ChatModule } from './chat/chat.module';
+import { MessageService } from './message/message.service';
+import { MessageController } from './message/message.controller';
+import { MessageModule } from './message/message.module';
 
 @Module({
   imports: [
@@ -12,7 +15,10 @@ import { ChatModule } from './chat/chat.module';
     DatabaseModule,
     UserModule,
     ChatModule,
+    MessageModule,
   ],
+  providers: [MessageService],
+  controllers: [MessageController],
 })
 export class AppModule {
   constructor() {
