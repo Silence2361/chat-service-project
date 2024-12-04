@@ -7,18 +7,22 @@ import { ICreateUser, IUser } from './user.interface';
 @Injectable()
 export class UserRepository {
   constructor(
-    @InjectModel(User) private readonly userRepository: ModelClass<User>,
+    @InjectModel(User) private readonly userModel: ModelClass<User>,
   ) {}
 
   async addUser(createUser: ICreateUser): Promise<IUser> {
-    return this.userRepository.query().insert(createUser);
+    return this.userModel.query().insert(createUser);
   }
 
   async getUsers(): Promise<IUser[]> {
-    return this.userRepository.query();
+    return this.userModel.query();
   }
 
   async getUserByIds(userIds: number[]): Promise<IUser[]> {
-    return this.userRepository.query().findByIds(userIds);
+    return this.userModel.query().findByIds(userIds);
+  }
+
+  async getUserByName(user_name: string) {
+    return this.userModel.query().findOne({ user_name });
   }
 }

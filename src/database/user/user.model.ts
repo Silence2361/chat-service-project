@@ -3,7 +3,7 @@ import { Chat } from '../chat/chat.model';
 import { Message } from '../message/message.model';
 
 export class User extends Model {
-  static tableName: 'users';
+  static tableName = 'users';
 
   id: number;
   user_name: string;
