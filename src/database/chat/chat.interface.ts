@@ -29,7 +29,17 @@ export interface IGetChatById {
   id: number;
 }
 
+export interface IGetChatByUserId {
+  user_id: number;
+}
+
 export interface IGetChatByIdResponse {
+  id: number;
+  name: string;
+  created_at: Date;
+}
+
+export interface IGetChatByUserIdResponse {
   id: number;
   name: string;
   created_at: Date;

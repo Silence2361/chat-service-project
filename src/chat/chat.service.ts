@@ -9,6 +9,8 @@ import {
   ICreateChatResponse,
   IGetChatById,
   IGetChatByIdResponse,
+  IGetChatByUserId,
+  IGetChatByUserIdResponse,
   IGetChatsResponse,
 } from 'src/database/chat/chat.interface';
 import { ChatRepository } from 'src/database/chat/chat.repository';
@@ -56,12 +58,15 @@ export class ChatService {
     return chat;
   }
 
-  async getChatByUser(user_id: number) {
+  async getChatByUserId(
+    param: IGetChatByUserId,
+  ): Promise<IGetChatByUserIdResponse[]> {
+    const { user_id } = param;
+
     const user = await this.userRepository.getUserById(user_id);
     if (!user) {
       throw new NotFoundException(`User with ID ${user_id} not found`);
     }
-
     return this.chatRepository.getChatListByUserId(user_id);
   }
 }
