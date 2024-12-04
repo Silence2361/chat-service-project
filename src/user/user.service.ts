@@ -2,8 +2,6 @@ import { ConflictException, Injectable } from '@nestjs/common';
 import {
   ICreateUser,
   ICreateUserResponse,
-  IGetUserById,
-  IGetUserByIdResponse,
   IGetUsersResponse,
   IUser,
 } from 'src/database/user/user.interface';
@@ -29,9 +27,4 @@ export class UserService {
   async getUsers(): Promise<IGetUsersResponse[]> {
     return this.userRepository.getUsers();
   }
-
-  //   async getUserById(param: IGetUserById): Promise<IGetUserByIdResponse>{
-  //     const {id} = param
-
-  //     const user: IUser = await this.userRepository.
 }

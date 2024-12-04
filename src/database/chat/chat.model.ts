@@ -3,22 +3,20 @@ import { User } from '../user/user.model';
 import { Message } from '../message/message.model';
 
 export class Chat extends Model {
-  static tableName: 'chat';
+  static tableName = 'chats';
 
   id: number;
   name: string;
-  user_id: number;
   created_at: Date;
 
   static get jsonSchema() {
     return {
       type: 'object',
-      required: ['name, user_id'],
+      required: ['name'],
 
       properties: {
         id: { type: 'integer' },
         name: { type: 'string' },
-        user_id: { type: 'integer' },
         created_at: { type: 'string', format: 'date-time' },
       },
     };

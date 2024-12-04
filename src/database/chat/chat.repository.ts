@@ -1,32 +1,47 @@
 import { InjectModel } from 'nestjs-objection/dist';
 import { Chat } from './chat.model';
 import { ModelClass } from 'objection';
-import { IChat, ICreateChat } from './chat.interface';
+import { IChat, ICreateChatRepositoryData } from './chat.interface';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ChatRepository {
   constructor(
-    @InjectModel(Chat) private readonly chatRepository: ModelClass<Chat>,
+    @InjectModel(Chat) private readonly chatModel: ModelClass<Chat>,
   ) {}
 
-  async createChat(createChat: ICreateChat): Promise<IChat> {
-    return this.chatRepository.query().insert(createChat);
+  async createChat(createChat: ICreateChatRepositoryData): Promise<IChat> {
+    return this.chatModel.query().insert(createChat);
   }
 
   async getChats(): Promise<IChat[]> {
-    return this.chatRepository.query();
+    return this.chatModel.query();
   }
 
   async getChatById(id: number): Promise<IChat> {
-    return this.chatRepository.query().findById(id);
+    return this.chatModel.query().findById(id);
   }
 
-  async getChatListByUserId(userId: number): Promise<IChat[]> {
-    return this.chatRepository
-      .query()
-      .joinRelated('user')
-      .where('user.id', userId)
-      .select('chat.*');
+  async getChatListByUserId(user_id: number): Promise<IChat[]> {
+    return (
+      this.chatModel
+        .query()
+        .joinRelated('users')
+        // .leftJoinRelated('messages')
+        .where('users.id', user_id)
+        .groupBy('chats.id')
+        // .orderByRaw('MAX(messages.created_at) DESC NULLS LAST')
+        .select('chats.*')
+    );
+  }
+
+  async relateUsersToChat(chat_id: number, userIds: number[]): Promise<void> {
+    for (const user_id of userIds) {
+      await this.chatModel.relatedQuery('users').for(chat_id).relate(user_id);
+    }
+  }
+
+  async getChatByName(name: string): Promise<IChat> {
+    return this.chatModel.query().findOne({ name });
   }
 }

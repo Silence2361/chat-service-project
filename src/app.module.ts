@@ -4,12 +4,14 @@ import { Model } from 'objection';
 import * as Knex from 'knex';
 import { DatabaseModule } from './database/database.module';
 import { UserModule } from './user/user.module';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     DatabaseModule,
     UserModule,
+    ChatModule,
   ],
 })
 export class AppModule {

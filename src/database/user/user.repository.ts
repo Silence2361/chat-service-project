@@ -22,7 +22,11 @@ export class UserRepository {
     return this.userModel.query().findByIds(userIds);
   }
 
-  async getUserByName(user_name: string) {
+  async getUserById(user_id: number): Promise<IUser> {
+    return this.userModel.query().findById(user_id);
+  }
+
+  async getUserByName(user_name: string): Promise<IUser> {
     return this.userModel.query().findOne({ user_name });
   }
 }
