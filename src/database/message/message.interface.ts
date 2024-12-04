@@ -14,10 +14,6 @@ export interface ICreateMessage {
 
 export interface ICreateMessageResponse {
   id: number;
-  chat_id: number;
-  author_id: number;
-  text: string;
-  created_at: Date;
 }
 
 export interface IGetMessageByChatId {

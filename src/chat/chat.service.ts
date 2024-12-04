@@ -40,7 +40,9 @@ export class ChatService {
 
     await this.chatRepository.relateUsersToChat(chat.id, user_ids);
 
-    return chat;
+    return {
+      id: chat.id,
+    };
   }
 
   async getChats(): Promise<IGetChatsResponse[]> {

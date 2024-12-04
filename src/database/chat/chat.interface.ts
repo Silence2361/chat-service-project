@@ -15,8 +15,6 @@ export interface ICreateChat {
 
 export interface ICreateChatResponse {
   id: number;
-  name: string;
-  created_at: Date;
 }
 
 export interface IGetChatsResponse {

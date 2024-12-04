@@ -10,8 +10,6 @@ export interface ICreateUser {
 
 export interface ICreateUserResponse {
   id: number;
-  user_name: string;
-  created_at: Date;
 }
 
 export interface IGetUsersResponse {

@@ -10,6 +10,7 @@ import {
   ICreateMessageResponse,
   IGetMessageByChatId,
   IGetMessageByChatIdResponse,
+  IMessage,
 } from 'src/database/message/message.interface';
 import { MessageRepository } from 'src/database/message/message.repository';
 import { UserRepository } from 'src/database/user/user.repository';
@@ -40,7 +41,11 @@ export class MessageService {
       );
     }
 
-    return this.messageRepository.createMessage(params);
+    const message: IMessage =
+      await this.messageRepository.createMessage(params);
+    return {
+      id: message.id,
+    };
   }
 
   async getMessageByChatId(

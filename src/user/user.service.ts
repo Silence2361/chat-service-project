@@ -21,7 +21,9 @@ export class UserService {
 
     const user: IUser = await this.userRepository.addUser({ user_name });
 
-    return user;
+    return {
+      id: user.id,
+    };
   }
 
   async getUsers(): Promise<IGetUsersResponse[]> {
