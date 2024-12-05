@@ -14,12 +14,7 @@ npm install
 
 ## Создать файл .env в корне проекта
 
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=postgres
-DB_PASSWORD=your_password
-DB_NAME=chat_service
-APP_PORT=9000
+.env.example
 
 ## Запуск PostgreSQL, создать БД и создать таблицы
 
@@ -50,6 +45,10 @@ user_id INT REFERENCES users(id) ON DELETE CASCADE,
 chat_id INT REFERENCES chats(id) ON DELETE CASCADE,
 PRIMARY KEY (user_id, chat_id)
 );
+
+## Запуск Docker
+
+docker-compose up --build
 
 ## Запуск
 
